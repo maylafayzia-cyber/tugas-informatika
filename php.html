@@ -1,0 +1,92 @@
+
+                <div class="field-row">
+                    <div>
+                        <label>Jumlah porsi</label>
+                        <input type="number" name="porsi"
+                            min="1" value="<?= e($porsi) ?>" required>
+                    </div>
+
+                    <div>
+                        <label>Target laba (%)</label>
+                        <input type="number" name="margin"
+                            min="1" max="90" step="1"
+                            value="<?= e($margin) ?>" required>
+                    </div>
+                </div>
+
+                <button type="submit">Hitung HPP Sekarang ↗</button>
+            </form>
+        </section>
+
+        <section class="result">
+            <p class="result-title">Hasil Perhitungan · <?= e($namaProduk) ?></p>
+
+            <p class="result-title">HPP per porsi</p>
+            <div class="big-number"><?= rp($hpp) ?></div>
+
+            <div class="price-box">
+                <p class="result-title">Harga jual yang disarankan</p>
+                <div class="big-number"><?= rp($hargaJual) ?></div>
+            </div>
+
+            <div class="stats">
+                <div class="stat">
+                    <p>Laba per porsi</p>
+                    <h3><?= rp($labaPorsi) ?></h3>
+                </div>
+
+                <div class="stat">
+                    <p>Food cost</p>
+                    <h3><?= number_format($foodCost, 1, ',', '.') ?>%</h3>
+                </div>
+
+                <div class="stat">
+                    <p>Total biaya produksi</p>
+                    <h3><?= rp($totalBiaya) ?></h3>
+                </div>
+
+                <div class="stat">
+                    <p>Laba per batch</p>
+                    <h3><?= rp($labaBatch) ?></h3>
+                </div>
+            </div>
+
+            <div class="chart-area">
+                <div class="sate"
+                    style="--bahan:<?= $persenBahan ?>%;--lain:<?= $persenBahan + $persenLain ?>%">
+                </div>
+
+                <div class="legend">
+                    <div>
+                        <span class="dot" style="background:#248b6c"></span>
+                        Bahan <?= round($persenBahan) ?>%
+                    </div>
+                    <div>
+                        <span class="dot" style="background:#f0b33e"></span>
+                        Biaya lain <?= round($persenLain) ?>%
+                    </div>
+                    <div>
+                        <span class="dot" style="background:#8de0b4"></span>
+                        Laba <?= round($persenLaba) ?>%
+                    </div>
+                </div>
+            </div>
+
+            <p class="note">
+                Produk <b><?= e($namaProduk) ?></b> dari usaha
+                <b><?= e($namaUsaha) ?></b> memiliki HPP
+                <?= rp($hpp) ?> per porsi.
+                <?= $foodCost <= 35
+                    ? 'Food cost tergolong cukup rendah berdasarkan perhitungan bahan terhadap harga jual.'
+                    : 'Periksa kembali biaya bahan agar harga jual tetap menguntungkan.' ?>
+            </p>
+        </section>
+    </div>
+
+    <div class="footer">
+        DapurProfit · Kalkulator HPP dan keuntungan usaha kuliner
+    </div>
+</div>
+
+</body>
+</html>
